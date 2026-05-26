@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Referent/ka zákazníckeho servisu – EPION</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #181243;
+      --blue:   #6d8ac6;
+      --purple: #8560a8;
+      --light:  #f4f6fb;
+      --white:  #ffffff;
+      --text:   #1e1a3a;
+      --muted:  #5c5880;
+      --border: #dde3f0;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--light);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      background: var(--navy);
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 340px; height: 340px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(133,96,168,.35) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: -40px; left: 10%;
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(109,138,198,.25) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .header-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 48px 32px 52px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Logo placeholder */
+    .logo-placeholder {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,.08);
+      border: 1.5px dashed rgba(255,255,255,.3);
+      border-radius: 10px;
+      padding: 12px 22px;
+      margin-bottom: 40px;
+      color: rgba(255,255,255,.45);
+      font-size: 13px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    .logo-placeholder svg {
+      opacity: .5;
+    }
+
+    .header-badge {
+      display: inline-block;
+      background: rgba(133,96,168,.3);
+      border: 1px solid rgba(133,96,168,.5);
+      color: #c9b4e8;
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(28px, 5vw, 42px);
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+    h1 em {
+      font-style: italic;
+      color: #a8c0e8;
+    }
+
+    .header-sub {
+      color: rgba(255,255,255,.55);
+      font-size: 15px;
+      font-weight: 300;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .header-sub span {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .header-sub span + span::before {
+      content: '·';
+      margin-right: 8px;
+      opacity: .4;
+    }
+
+    /* ─── HIGHLIGHT STRIP ─── */
+    .highlight-strip {
+      background: linear-gradient(90deg, var(--purple) 0%, var(--blue) 100%);
+      padding: 18px 32px;
+    }
+    .highlight-strip-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .hs-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,.92);
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .hs-item svg { opacity: .8; flex-shrink: 0; }
+
+    /* ─── MAIN ─── */
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 48px 32px 80px;
+    }
+
+    /* ─── SECTION ─── */
+    .section {
+      margin-bottom: 44px;
+    }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 20px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 22px;
+      color: var(--navy);
+      margin-bottom: 14px;
+    }
+
+    p {
+      color: var(--muted);
+      font-size: 15px;
+      margin-bottom: 10px;
+    }
+
+    /* ─── CARDS GRID ─── */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 14px;
+      margin-top: 6px;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 20px 18px;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .card:hover {
+      box-shadow: 0 6px 24px rgba(24,18,67,.09);
+      transform: translateY(-2px);
+    }
+    .card-icon {
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 12px;
+    }
+    .card-icon svg { color: white; }
+    .card h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+    .card p { font-size: 13px; margin: 0; color: var(--muted); }
+
+    /* ─── LIST ─── */
+    .styled-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+    .styled-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    .styled-list li::before {
+      content: '';
+      flex-shrink: 0;
+      margin-top: 7px;
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+    }
+
+    /* ─── REQUIREMENTS TABLE ─── */
+    .req-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .req-pill {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .req-pill .label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+    .req-pill .value {
+      font-size: 14.5px;
+      font-weight: 500;
+      color: var(--navy);
+    }
+
+    /* ─── TRAITS ─── */
+    .traits {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+    .trait {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      padding: 6px 16px;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--navy);
+    }
+    .trait::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--purple);
+      flex-shrink: 0;
+    }
+
+    /* ─── CTA BOX ─── */
+    .cta-box {
+      background: var(--navy);
+      border-radius: 20px;
+      padding: 40px 40px 36px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      margin-top: 56px;
+    }
+    .cta-box::before {
+      content: '';
+      position: absolute;
+      top: -50px; right: -50px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(133,96,168,.4) 0%, transparent 70%);
+    }
+    .cta-box::after {
+      content: '';
+      position: absolute;
+      bottom: -30px; left: -30px;
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(109,138,198,.3) 0%, transparent 70%);
+    }
+    .cta-box > * { position: relative; z-index: 1; }
+    .cta-box h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 26px;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .cta-box p {
+      color: rgba(255,255,255,.62);
+      font-size: 15px;
+      max-width: 460px;
+      margin: 0 auto 0;
+      line-height: 1.7;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      text-align: center;
+      padding: 28px 32px;
+      color: rgba(24,18,67,.3);
+      font-size: 12.5px;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 600px) {
+      .req-grid { grid-template-columns: 1fr; }
+      .highlight-strip-inner { gap: 8px; }
+      .cta-box { padding: 30px 24px 28px; }
+      main { padding: 32px 20px 60px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── HEADER ─── -->
+<header>
+  <div class="header-inner">
+
+    <!-- Logo placeholder -->
+    <div class="logo-placeholder">
+      <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <rect x="3" y="3" width="18" height="18" rx="3"/>
+        <path d="M3 9h18M9 21V9"/>
+      </svg>
+      Miesto pre logo EPION
+    </div>
+
+    <div class="header-badge">Otvorená pozícia · Nitra</div>
+    <h1>Referent/ka zákazníckeho servisu<br><em>a administratívy</em></h1>
+    <div class="header-sub">
+      <span>
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16"/><path d="M1 21h22"/><path d="M9 21v-4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v4"/></svg>
+        EPION s.r.o.
+      </span>
+      <span>
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        Nitra-Chrenová
+      </span>
+      <span>Zdravotníctvo</span>
+    </div>
+
+  </div>
+</header>
+
+<!-- ─── HIGHLIGHT STRIP ─── -->
+<div class="highlight-strip">
+  <div class="highlight-strip-inner">
+    <div class="hs-item">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      Pracovná doba: 8:00 – 16:30
+    </div>
+    <div class="hs-item">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      Od 1 200 € brutto / mesiac
+    </div>
+    <div class="hs-item">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      Plný úväzok
+    </div>
+    <div class="hs-item">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Len z kancelárie (nie home office)
+    </div>
+  </div>
+</div>
+
+<!-- ─── MAIN ─── -->
+<main>
+
+  <!-- Náplň práce -->
+  <div class="section">
+    <div class="section-label">Čo budete robiť</div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 12 19.79 19.79 0 0 1 1.08 3.4 2 2 0 0 1 3.05 1.21h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.09 9.1a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21 16z"/></svg>
+        </div>
+        <h3>Komunikácia so zákazníkmi</h3>
+        <p>E-mail, telefón, odborná podpora a vybavovanie objednávok s profesionálnym prístupom.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
+        <h3>Spracovanie objednávok</h3>
+        <p>Práca v ERP systéme, sledovanie stavov objednávok, vyskladnenie a príprava fakturácie.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <h3>Správa dát a reporting</h3>
+        <p>Excel, master data v ERP, aktualizácia zákazníkov a produktov, jednoduché reporty.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        </div>
+        <h3>Podpora e-shopu</h3>
+        <p>Príprava podkladov k produktom, kategorizácia a parametrizácia pre online predaj.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Správa pacientskych účtov</h3>
+        <p>Samostatná skupina zákazníkov – pacientov s pravidelnými opakovanými objednávkami.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 12h8M12 8v8"/></svg>
+        </div>
+        <h3>Riešenie reklamácií</h3>
+        <p>Promptné a efektívne vybavovanie reklamácií s dôrazom na spokojnosť zákazníka.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Typický deň -->
+  <div class="section">
+    <div class="section-label">Typický deň na pozícii</div>
+    <ul class="styled-list">
+      <li>Ráno začínate kontrolou e-mailov a objednávok, nastavujete si priority svojich úloh a organizujete si ich počas dňa.</li>
+      <li>Spracovávate nové požiadavky zákazníkov a riešite aktuálne otázky.</li>
+      <li>Koordinujete komunikáciu medzi obchodným tímom, zákazníkmi a skladom.</li>
+      <li>Aktívne vyhľadávate riešenia pre zákaznícke požiadavky a navrhujete zlepšenia procesov.</li>
+    </ul>
+  </div>
+
+  <!-- Požiadavky -->
+  <div class="section">
+    <div class="section-label">Čo od vás očakávame</div>
+    <div class="req-grid" style="margin-bottom: 20px;">
+      <div class="req-pill">
+        <span class="label">Vzdelanie</span>
+        <span class="value">Stredoškolské s maturitou</span>
+      </div>
+      <div class="req-pill">
+        <span class="label">Jazykové znalosti</span>
+        <span class="value">Anglický jazyk – min. A2</span>
+      </div>
+      <div class="req-pill">
+        <span class="label">Microsoft Excel</span>
+        <span class="value">Základy (filtrovanie, jednoduché vzorce, práca s tabuľkami a kontingenčnými tabuľkami)</span>
+      </div>
+      <div class="req-pill">
+        <span class="label">Microsoft Outlook</span>
+        <span class="value">Mierne pokročilý</span>
+      </div>
+    </div>
+
+    <div class="traits">
+      <span class="trait">Samostatnosť</span>
+      <span class="trait">Precíznosť a zmysel pre detail</span>
+      <span class="trait">Zodpovednosť a organizovanosť</span>
+      <span class="trait">Komunikatívnosť a príjemné vystupovanie</span>
+      <span class="trait">Flexibilita</span>
+      <span class="trait">Tímový hráč</span>
+      <span class="trait">Chladná hlava pod tlakom</span>
+      <span class="trait">Záujem o stabilnú dlhodobú spoluprácu (nie iba vyskúšanie)</span>
+    </div>
+  </div>
+
+  <!-- Benefity -->
+  <div class="section">
+    <div class="section-label">Čo ponúkame</div>
+    <ul class="styled-list">
+      <li>Zázemie stabilnej spoločnosti v zmysluplnom zdravotníckom segmente.</li>
+      <li>Priateľský kolektív a kultúra vzájomnej pomoci.</li>
+      <li>Prostredie, kde milujeme inovácie a maximálnu automatizáciu procesov.</li>
+      <li>Priestor na rast – neustále hľadáme spôsoby, ako zefektívniť prácu každého z nás.</li>
+    </ul>
+  </div>
+
+  <!-- CTA box -->
+  <div class="cta-box">
+    <h2>Máte o pozíciu záujem?</h2>
+    <p>Ak ste dostali e-mail s informáciami o tejto pozícii a stále máte záujem, jednoducho naň odpovedzte. Tešíme sa na vás.</p>
+  </div>
+
+</main>
+
+<footer>
+  © EPION s.r.o. · Lomnická 42, Nitra-Chrenová
+</footer>
+
+</body>
+</html>
